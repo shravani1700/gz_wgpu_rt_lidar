@@ -70,7 +70,11 @@ if(BUILD_TESTING)
   # Uses gazebo style
   list(APPEND AMENT_LINT_AUTO_EXCLUDE
   ament_cmake_cpplint
-  copyright
+  ament_cmake_copyright
+  )
+  # Exclude generated files from linting
+  set(AMENT_LINT_AUTO_FILE_EXCLUDE
+    src/rust_header.h
   )
   ament_lint_auto_find_test_dependencies()
 endif()
