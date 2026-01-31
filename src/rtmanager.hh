@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include "./rust_header.h"
+#include "./rust_binding.h"
 
 #include <condition_variable>
 #include <memory>
