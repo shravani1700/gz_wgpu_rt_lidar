@@ -41,18 +41,18 @@ FetchContent_MakeAvailable(Corrosion)
 find_program(CBINDGEN cbindgen)
 if(CBINDGEN)
   add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/src/rust_binding.h
+    OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/src/rust_bindings.h
     COMMAND ${CBINDGEN} --config ${CMAKE_CURRENT_SOURCE_DIR}/src/rust_system/cbindgen.toml
             --crate rust_system
-            --output ${CMAKE_CURRENT_SOURCE_DIR}/src/rust_binding.h
+            --output ${CMAKE_CURRENT_SOURCE_DIR}/src/rust_bindings.h
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/rust_system
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/rust_system/src/lib.rs
             ${CMAKE_CURRENT_SOURCE_DIR}/src/rust_system/cbindgen.toml
     COMMENT "Generating Rust bindings header using cbindgen"
   )
-  add_custom_target(rust_bindings DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/rust_binding.h)
+  add_custom_target(rust_bindings DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/rust_bindings.h)
 else()
-  message(WARNING "cbindgen not found, rust_binding.h will not be generated")
+  message(WARNING "cbindgen not found, rust_bindings.h will not be generated")
 endif()
 
 #============================================================================
@@ -97,7 +97,7 @@ if(BUILD_TESTING)
   )
   # Exclude generated files from linting
   set(AMENT_LINT_AUTO_FILE_EXCLUDE
-    src/rust_header.h
+    src/rust_bindings.h
   )
   ament_lint_auto_find_test_dependencies()
 endif()
